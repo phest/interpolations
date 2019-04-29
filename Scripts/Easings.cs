@@ -8,6 +8,22 @@ namespace Interpolations
         public static float Linear(float k) {
             return k;
         }
+
+        public static class Cubic
+        {
+            public static float In(float k) {
+                return k * k * k;
+            }
+        
+            public static float Out(float k) {
+                return --k * k * k + 1;
+            }
+        
+            public static float InOut(float k) {
+                if ((k *= 2) < 1) return 0.5f * k * k * k;
+                return 0.5f * ((k -= 2) * k * k + 2);
+            }            
+        }
         
     }
 }
