@@ -4,13 +4,14 @@
 namespace Interpolations.Tweens
 {
     using UnityEngine;
-    
-    public partial class Tween
+
+    public abstract class Tween<T>
     {
         public float Delay;
         public float Duration = 1;
-        
+
         I.Ease _ease;
+
         public I.Ease Ease
         {
             get => _ease;
@@ -20,12 +21,14 @@ namespace Interpolations.Tweens
                 {
                     return;
                 }
+
                 _ease = value;
                 UpdateEasingMethod();
             }
         }
-        
+
         I.Easing _easing;
+
         public I.Easing Easing
         {
             get => _easing;
@@ -35,22 +38,24 @@ namespace Interpolations.Tweens
                 {
                     return;
                 }
+
                 _easing = value;
                 UpdateEasingMethod();
             }
         }
+
         I.EasingMethod easingMethod;
 
         void UpdateEasingMethod()
         {
-            easingMethod = I.EasingMethods[(short)_easing, (short)_ease];
+            easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
         }
 
         public Tween()
         {
         }
 
-        public Tween Timing(
+        public Tween<T> Timing(
             float delay,
             float duration,
             I.Ease ease = default,
@@ -65,23 +70,25 @@ namespace Interpolations.Tweens
             return this;
         }
 
-        public Tween Timing(TweenTiming timing)
+        public Tween<T> Timing(TweenTiming timing)
         {
             return Timing(timing.Delay, timing.Duration, timing.Ease, timing.Easing);
         }
 
         float elapsedActiveTime;
         public float ValueRatio { get; private set; }
-        
+
         public TweenState State { get; private set; }
-        
-        public void Start()
+
+        public Tween<T> Start()
         {
             elapsedActiveTime = 0;
-            
+
             State = TweenState.InDelay;
+
+            return this;
         }
-        
+
         public void Update(float timeDelta)
         {
             if (State == TweenState.NotStarted || State == TweenState.Done)
@@ -90,17 +97,20 @@ namespace Interpolations.Tweens
             }
 
             elapsedActiveTime += timeDelta;
-            
+
             if (elapsedActiveTime <= Delay)
             {
                 State = TweenState.InDelay;
                 ValueRatio = 0;
-            } 
-            else if (elapsedActiveTime <= Delay + Duration)
+                return;
+            }
+
+            if (elapsedActiveTime <= Delay + Duration)
             {
                 if (State == TweenState.InDelay)
                 {
                     State = TweenState.Tweening;
+                    SaveInitialValue();
                 }
 
                 float timingRatio = (elapsedActiveTime - Delay) / Duration;
@@ -111,8 +121,14 @@ namespace Interpolations.Tweens
                 State = TweenState.Done;
                 ValueRatio = 1;
             }
+
+            SetSubjectValue();
         }
-        
-    }    
-    
+
+        public abstract Tween<T> To(T target);
+        public abstract T TargetValue { get; set; }
+        public abstract T InitialValue { get; set; }
+        protected abstract void SaveInitialValue();
+        protected abstract void SetSubjectValue();
+    }
 }
