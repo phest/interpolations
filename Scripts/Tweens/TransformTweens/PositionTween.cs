@@ -8,20 +8,30 @@ namespace Interpolations.Tweens
     public class PositionTween : Tween<Vector3>
     {
         readonly Transform subject;
+        readonly bool localPosition;
 
-        public PositionTween(Transform subject)
+        public PositionTween(Transform subject, bool localPosition = true)
         {
             this.subject = subject;
+            this.localPosition = localPosition;
         }
 
         protected override void SaveInitialValue()
         {
-            InitialValue = subject.position;
+            InitialValue = localPosition ? subject.localPosition : subject.position;
         }
 
         protected override void SetSubjectValue()
         {
-            subject.position = InitialValue + (TargetValue - InitialValue) * ValueRatio;
+            Vector3 value = InitialValue + (TargetValue - InitialValue) * ValueRatio;
+            if (localPosition)
+            {
+                subject.localPosition = value;
+            }
+            else
+            {
+                subject.position = value;
+            }
         }
     }
 }
