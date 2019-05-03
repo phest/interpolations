@@ -46,7 +46,11 @@ namespace Interpolations.Tweens
             easingMethod = I.EasingMethods[(short)_easing, (short)_ease];
         }
 
-        public TweenBase(
+        public TweenBase()
+        {
+        }
+
+        public TweenBase Timing(
             float delay,
             float duration,
             I.Ease ease = default(I.Ease),
@@ -58,23 +62,16 @@ namespace Interpolations.Tweens
             _ease = ease;
             _easing = easing;
             UpdateEasingMethod();
+            return this;
         }
 
-        public TweenBase(
-            float duration,
-            I.Ease ease = default(I.Ease),
-            I.Easing easing = default(I.Easing)
-        ) : this(0, duration, ease, easing)
+        public TweenBase Timing(TweenOptions options)
         {
-        }
-
-        public TweenBase(TweenOptions options)
-            : this(options.Delay, options.Duration, options.Ease, options.Easing)
-        {   
+            return Timing(options.Delay, options.Duration, options.Ease, options.Easing);
         }
 
         float elapsedActiveTime;
-        float tweenRatio;
+        public float ValueRatio { get; private set; } = 0;
         
         public TweenState State { get; private set; } = default(TweenState);
         
@@ -97,7 +94,7 @@ namespace Interpolations.Tweens
             if (elapsedActiveTime <= Delay)
             {
                 State = TweenState.InDelay;
-                tweenRatio = 0;
+                ValueRatio = 0;
             } 
             else if (elapsedActiveTime <= Delay + Duration)
             {
@@ -105,18 +102,16 @@ namespace Interpolations.Tweens
                 {
                     State = TweenState.Tweening;
                 }
-                tween
                 
-                tweenRatio = (elapsedActiveTime - Delay) / Duration;
+                ValueRatio = (elapsedActiveTime - Delay) / Duration;
             }
             else
             {
                 State = TweenState.Done;
-                tweenRatio = 1;
+                ValueRatio = 1;
             }
         }
         
-
     }    
     
 }
