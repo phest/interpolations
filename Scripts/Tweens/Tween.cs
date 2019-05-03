@@ -65,9 +65,9 @@ namespace Interpolations.Tweens
             return this;
         }
 
-        public Tween Timing(TweenOptions options)
+        public Tween Timing(TweenTiming timing)
         {
-            return Timing(options.Delay, options.Duration, options.Ease, options.Easing);
+            return Timing(timing.Delay, timing.Duration, timing.Ease, timing.Easing);
         }
 
         float elapsedActiveTime;

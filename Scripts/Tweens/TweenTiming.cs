@@ -5,16 +5,16 @@ namespace Interpolations.Tweens
 {
     using System;
 
-    // Tween.Setup - optional struct for inspector convenience (hence mutable) 
+    // Optional struct for inspector convenience (hence mutable) 
     [Serializable]
-    public struct TweenOptions
+    public struct TweenTiming
     {
         public float Delay;
         public float Duration;
         public I.Ease Ease;
         public I.Easing Easing;
 
-        public TweenOptions(
+        public TweenTiming(
             float delay,
             float duration,
             I.Ease ease = default,
@@ -27,7 +27,7 @@ namespace Interpolations.Tweens
             Easing = easing;
         }
 
-        public TweenOptions(
+        public TweenTiming(
             float duration,
             I.Ease ease = default,
             I.Easing easing = default
