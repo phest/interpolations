@@ -3,8 +3,6 @@
 
 namespace Interpolations.Tweens
 {
-    using UnityEngine;
-
     public abstract class Tween<T>
     {
         public float Delay;
@@ -49,10 +47,6 @@ namespace Interpolations.Tweens
         void UpdateEasingMethod()
         {
             easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
-        }
-
-        public Tween()
-        {
         }
 
         public Tween<T> Timing(
