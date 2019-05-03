@@ -1,3 +1,6 @@
+// Interpolations - https://github.com/phest/interpolations
+// Copyright Steph Thirion - Licensed under the MIT license
+
 namespace Interpolations.Tweens
 {
     /// <summary>
@@ -5,14 +8,6 @@ namespace Interpolations.Tweens
     /// </summary>
     public class RatioTween : Tween<float>
     {
-        public override float InitialValue { get; set; }
-        public override float TargetValue { get; set; }
-
-        public override Tween<float> To(float target)
-        {
-            return this;
-        }
-
         protected override void SaveInitialValue()
         {
         }

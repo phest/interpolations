@@ -49,6 +49,15 @@ namespace Interpolations.Tweens
             easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
         }
 
+        public T TargetValue { get; set; }
+        public T InitialValue { get; set; }
+
+        public Tween<T> To(T target)
+        {
+            TargetValue = target;
+            return this;
+        }
+
         public Tween<T> Timing(
             float delay,
             float duration,
@@ -119,9 +128,6 @@ namespace Interpolations.Tweens
             SetSubjectValue();
         }
 
-        public abstract Tween<T> To(T target);
-        public abstract T TargetValue { get; set; }
-        public abstract T InitialValue { get; set; }
         protected abstract void SaveInitialValue();
         protected abstract void SetSubjectValue();
     }
