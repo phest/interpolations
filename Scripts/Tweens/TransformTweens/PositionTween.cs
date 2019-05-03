@@ -4,7 +4,7 @@
 namespace Interpolations.Tweens
 {
     using UnityEngine;
-    
+
     public class PositionTween : Tween<Vector3>
     {
         readonly Transform subject;

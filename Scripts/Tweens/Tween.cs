@@ -58,12 +58,7 @@ namespace Interpolations.Tweens
             return this;
         }
 
-        public Tween<T> Timing(
-            float delay,
-            float duration,
-            I.Ease ease = default,
-            I.Easing easing = default
-        )
+        public Tween<T> Timing(float delay, float duration, I.Ease ease = default, I.Easing easing = default)
         {
             Delay = delay;
             Duration = duration;

@@ -11,7 +11,7 @@ namespace Interpolations.Tweens
         protected override void SaveInitialValue()
         {
         }
-        
+
         protected override void SetSubjectValue()
         {
         }

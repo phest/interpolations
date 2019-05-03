@@ -4,18 +4,18 @@
 namespace Interpolations.Tweens
 {
     using System;
-    
+
     public class FloatTween : ClosureTween<float>
     {
         public sealed override Func<float> Getter { get; set; }
-        public sealed override  Action<float> Setter { get; set; }
-        
+        public sealed override Action<float> Setter { get; set; }
+
         public FloatTween(Func<float> getter, Action<float> setter)
         {
             Getter = getter;
             Setter = setter;
         }
-        
+
         protected override void SaveInitialValue()
         {
             InitialValue = Getter?.Invoke() ?? 0;

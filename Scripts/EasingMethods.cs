@@ -6,22 +6,25 @@
 
 namespace Interpolations
 {
-    public static partial class I {
-
-        public static float Linear(float k) {
+    public static partial class I
+    {
+        public static float Linear(float k)
+        {
             return k;
         }
 
         public static class Cubic
         {
-            public static float In(float k) {
+            public static float In(float k)
+            {
                 return k * k * k;
             }
-        
-            public static float Out(float k) {
+
+            public static float Out(float k)
+            {
                 return --k * k * k + 1;
             }
-        
+
             public static float InOut(float k)
             {
                 k *= 2;
@@ -29,10 +32,10 @@ namespace Interpolations
                 {
                     return 0.5f * k * k * k;
                 }
+
                 k -= 2;
                 return 0.5f * (k * k * k + 2);
             }
         }
-        
     }
 }

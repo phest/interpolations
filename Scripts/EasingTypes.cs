@@ -11,11 +11,11 @@ namespace Interpolations
             In,
             Out
         }
-        
+
         public enum Easing
         {
             Cubic,
-            Linear   
+            Linear
         }
 
         public delegate float EasingMethod(float k);

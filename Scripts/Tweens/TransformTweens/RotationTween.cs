@@ -4,7 +4,7 @@
 namespace Interpolations.Tweens
 {
     using UnityEngine;
-    
+
     public class RotationTween : Tween<Quaternion>
     {
         readonly Transform subject;
@@ -15,7 +15,7 @@ namespace Interpolations.Tweens
             this.subject = subject;
             this.local = local;
         }
-        
+
         protected override void SaveInitialValue()
         {
             InitialValue = local ? subject.localRotation : subject.rotation;

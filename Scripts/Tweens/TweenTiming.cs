@@ -5,7 +5,7 @@ namespace Interpolations.Tweens
 {
     using System;
 
-    // Optional struct for inspector convenience (hence mutable) 
+    // Optional struct for inspector convenience (hence mutable)
     [Serializable]
     public struct TweenTiming
     {
