@@ -17,8 +17,8 @@ namespace Interpolations.Tweens
         public TweenOptions(
             float delay,
             float duration,
-            I.Ease ease = default(I.Ease),
-            I.Easing easing = default(I.Easing)
+            I.Ease ease = default,
+            I.Easing easing = default
         )
         {
             Delay = delay;
@@ -29,8 +29,8 @@ namespace Interpolations.Tweens
 
         public TweenOptions(
             float duration,
-            I.Ease ease = default(I.Ease),
-            I.Easing easing = default(I.Easing)
+            I.Ease ease = default,
+            I.Easing easing = default
         ) : this(0, duration, ease, easing)
         {
         }

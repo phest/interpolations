@@ -53,8 +53,8 @@ namespace Interpolations.Tweens
         public Tween Timing(
             float delay,
             float duration,
-            I.Ease ease = default(I.Ease),
-            I.Easing easing = default(I.Easing)
+            I.Ease ease = default,
+            I.Easing easing = default
         )
         {
             Delay = delay;
@@ -71,9 +71,9 @@ namespace Interpolations.Tweens
         }
 
         float elapsedActiveTime;
-        public float ValueRatio { get; private set; } = 0;
+        public float ValueRatio { get; private set; }
         
-        public TweenState State { get; private set; } = default(TweenState);
+        public TweenState State { get; private set; }
         
         public void Start()
         {
