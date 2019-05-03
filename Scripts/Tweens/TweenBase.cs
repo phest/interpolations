@@ -8,7 +8,7 @@ namespace Interpolations.Tweens
     public partial class TweenBase
     {
         public float Delay;
-        public float Duration;
+        public float Duration = 1;
         
         I.Ease _ease;
         public I.Ease Ease
@@ -102,8 +102,9 @@ namespace Interpolations.Tweens
                 {
                     State = TweenState.Tweening;
                 }
-                
-                ValueRatio = (elapsedActiveTime - Delay) / Duration;
+
+                float timingRatio = (elapsedActiveTime - Delay) / Duration;
+                ValueRatio = easingMethod?.Invoke(timingRatio) ?? timingRatio;
             }
             else
             {
