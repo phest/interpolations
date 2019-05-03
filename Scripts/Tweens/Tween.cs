@@ -5,7 +5,7 @@ namespace Interpolations.Tweens
 {
     using UnityEngine;
     
-    public partial class TweenBase
+    public partial class Tween
     {
         public float Delay;
         public float Duration = 1;
@@ -46,11 +46,11 @@ namespace Interpolations.Tweens
             easingMethod = I.EasingMethods[(short)_easing, (short)_ease];
         }
 
-        public TweenBase()
+        public Tween()
         {
         }
 
-        public TweenBase Timing(
+        public Tween Timing(
             float delay,
             float duration,
             I.Ease ease = default(I.Ease),
@@ -65,7 +65,7 @@ namespace Interpolations.Tweens
             return this;
         }
 
-        public TweenBase Timing(TweenOptions options)
+        public Tween Timing(TweenOptions options)
         {
             return Timing(options.Delay, options.Duration, options.Ease, options.Easing);
         }
