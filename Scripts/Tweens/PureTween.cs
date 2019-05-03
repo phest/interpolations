@@ -4,9 +4,9 @@
 namespace Interpolations.Tweens
 {
     /// <summary>
-    /// Unlinked Tween, used only for its ValueRatio.
+    /// Unlinked Tween, no side effects (usable through its ValueRatio)
     /// </summary>
-    public class RatioTween : Tween<float>
+    public class PureTween : Tween<float>
     {
         protected override void SaveInitialValue()
         {
