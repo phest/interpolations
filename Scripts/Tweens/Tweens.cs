@@ -9,9 +9,9 @@ namespace Interpolations.Tweens
 
     public class Tweens
     {
-        public static void Run(ITween tween, object binding)
+        public static void Run(ITween tween, object uniqueBinding = null)
         {
-            AutoTweensRunner.SceneInstance.StartTween(tween, binding);
+            AutoTweensRunner.SceneInstance.StartTween(tween, uniqueBinding);
         }
     }
 }
