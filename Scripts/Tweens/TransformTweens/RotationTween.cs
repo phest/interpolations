@@ -18,12 +18,12 @@ namespace Interpolations.Tweens
 
         protected override void GetInitialValueFromSubject()
         {
-            InitialValue = local ? subject.localRotation : subject.rotation;
+            OriginValue = local ? subject.localRotation : subject.rotation;
         }
 
         protected override void ApplyCurrentValueToSubject()
         {
-            Quaternion value = Quaternion.LerpUnclamped(InitialValue, TargetValue, ValueRatio);
+            Quaternion value = Quaternion.LerpUnclamped(OriginValue, TargetValue, ValueRatio);
             if (local)
             {
                 subject.localRotation = value;

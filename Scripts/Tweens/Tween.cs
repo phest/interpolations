@@ -5,6 +5,8 @@ namespace Interpolations.Tweens
 {
     public abstract class Tween<T>
     {
+        #region core configuration
+
         public float Delay;
         public float Duration = 1;
 
@@ -49,15 +51,6 @@ namespace Interpolations.Tweens
             easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
         }
 
-        public T TargetValue { get; set; }
-        public T InitialValue { get; set; }
-
-        public Tween<T> To(T target)
-        {
-            TargetValue = target;
-            return this;
-        }
-
         public Tween<T> Timing(float delay, float duration, I.Ease ease = default, I.Easing easing = default)
         {
             Delay = delay;
@@ -73,10 +66,23 @@ namespace Interpolations.Tweens
             return Timing(timing.Delay, timing.Duration, timing.Ease, timing.Easing);
         }
 
-        float elapsedActiveTime;
-        public float ValueRatio { get; private set; }
+        public T TargetValue { get; set; }
+        public T OriginValue { get; set; }
+
+        public Tween<T> To(T target)
+        {
+            TargetValue = target;
+            return this;
+        }
+
+        #endregion
+
+        #region state
 
         public TweenState State { get; private set; }
+
+        float elapsedActiveTime;
+        public float ValueRatio { get; private set; }
 
         public Tween<T> Start()
         {
@@ -125,5 +131,7 @@ namespace Interpolations.Tweens
 
         protected abstract void GetInitialValueFromSubject();
         protected abstract void ApplyCurrentValueToSubject();
+
+        #endregion
     }
 }

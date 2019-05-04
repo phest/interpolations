@@ -5,7 +5,7 @@ namespace Interpolations.Tweens
 {
     using UnityEngine;
     using System;
-    
+
     public class Vector3Tween : ClosureTween<Vector3>
     {
         public Vector3Tween(Func<Vector3> getter, Action<Vector3> setter)
@@ -13,16 +13,15 @@ namespace Interpolations.Tweens
             Getter = getter;
             Setter = setter;
         }
-        
+
         protected override void GetInitialValueFromSubject()
         {
-            InitialValue = Getter?.Invoke() ?? Vector3.zero;
+            OriginValue = Getter?.Invoke() ?? Vector3.zero;
         }
 
         protected override void ApplyCurrentValueToSubject()
         {
-            Setter?.Invoke(Vector3.LerpUnclamped(InitialValue, TargetValue, ValueRatio));
+            Setter?.Invoke(Vector3.LerpUnclamped(OriginValue, TargetValue, ValueRatio));
         }
-
     }
 }

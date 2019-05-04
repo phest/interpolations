@@ -15,12 +15,12 @@ namespace Interpolations.Tweens
 
         protected override void GetInitialValueFromSubject()
         {
-            InitialValue = Getter?.Invoke() ?? 0;
+            OriginValue = Getter?.Invoke() ?? 0;
         }
 
         protected override void ApplyCurrentValueToSubject()
         {
-            Setter?.Invoke(InitialValue + (TargetValue - InitialValue) * ValueRatio);
+            Setter?.Invoke(OriginValue + (TargetValue - OriginValue) * ValueRatio);
         }
     }
 }
