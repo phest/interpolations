@@ -9,66 +9,38 @@ namespace Interpolations
 
         public float Delay;
         public float Duration = 1;
-
-        I.Ease _ease;
-
-        public I.Ease Ease
-        {
-            get => _ease;
-            set
-            {
-                if (_ease == value)
-                {
-                    return;
-                }
-
-                _ease = value;
-                UpdateEasingMethod();
-            }
-        }
-
-        I.Easing _easing;
-
-        public I.Easing Easing
-        {
-            get => _easing;
-            set
-            {
-                if (_easing == value)
-                {
-                    return;
-                }
-
-                _easing = value;
-                UpdateEasingMethod();
-            }
-        }
-
-        I.EasingMethod easingMethod;
-
-        void UpdateEasingMethod()
-        {
-            easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
-        }
-
+        public I.EasingMethod EasingMethod = I.Cubic.InOut;
+        
         public Tween<T> Timing(
             float delay,
             float duration,
-            I.Ease ease = I.Ease.InOut,
-            I.Easing easing = I.Easing.Cubic
+            I.EasingMethod easingMethod
         )
         {
             Delay = delay;
             Duration = duration;
-            _ease = ease;
-            _easing = easing;
-            UpdateEasingMethod();
+            EasingMethod = easingMethod;
+            return this;
+        }
+        
+        public Tween<T> Timing(
+            float delay,
+            float duration
+        )
+        {
+            Delay = delay;
+            Duration = duration;
+            EasingMethod = I.Cubic.InOut;
             return this;
         }
 
         public Tween<T> Timing(TweenTiming timing)
         {
-            return Timing(timing.Delay, timing.Duration, timing.Ease, timing.Easing);
+            return Timing(
+                timing.Delay,
+                timing.Duration,
+                I.EasingMethods[(short) timing.Easing, (short) timing.Ease]
+            );
         }
 
         public T TargetValue { get; set; }
@@ -128,7 +100,7 @@ namespace Interpolations
                 }
 
                 float timingRatio = (elapsedActiveTime - Delay) / Duration;
-                ValueRatio = easingMethod?.Invoke(timingRatio) ?? timingRatio;
+                ValueRatio = EasingMethod?.Invoke(timingRatio) ?? timingRatio;
             }
             else
             {
