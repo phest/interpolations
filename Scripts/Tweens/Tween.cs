@@ -3,7 +3,7 @@
 
 namespace Interpolations.Tweens
 {
-    public abstract class Tween<T>
+    public abstract class Tween<T> : ITween
     {
         #region core configuration
 
@@ -83,7 +83,7 @@ namespace Interpolations.Tweens
 
         float elapsedActiveTime;
         public float ValueRatio { get; private set; }
-
+        
         public Tween<T> Start()
         {
             elapsedActiveTime = 0;
@@ -91,6 +91,11 @@ namespace Interpolations.Tweens
             State = TweenState.InDelay;
 
             return this;
+        }
+        
+        public void StartNonChainable()
+        {
+            Start();
         }
 
         public void Update(float timeDelta)
