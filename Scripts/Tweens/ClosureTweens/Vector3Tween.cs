@@ -14,12 +14,12 @@ namespace Interpolations.Tweens
             Setter = setter;
         }
         
-        protected override void SaveInitialValue()
+        protected override void GetInitialValueFromSubject()
         {
             InitialValue = Getter?.Invoke() ?? Vector3.zero;
         }
 
-        protected override void SetSubjectValue()
+        protected override void ApplyCurrentValueToSubject()
         {
             Setter?.Invoke(Vector3.LerpUnclamped(InitialValue, TargetValue, ValueRatio));
         }

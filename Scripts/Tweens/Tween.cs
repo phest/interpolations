@@ -108,7 +108,7 @@ namespace Interpolations.Tweens
                 if (State == TweenState.InDelay)
                 {
                     State = TweenState.Tweening;
-                    SaveInitialValue();
+                    GetInitialValueFromSubject();
                 }
 
                 float timingRatio = (elapsedActiveTime - Delay) / Duration;
@@ -120,10 +120,10 @@ namespace Interpolations.Tweens
                 ValueRatio = 1;
             }
 
-            SetSubjectValue();
+            ApplyCurrentValueToSubject();
         }
 
-        protected abstract void SaveInitialValue();
-        protected abstract void SetSubjectValue();
+        protected abstract void GetInitialValueFromSubject();
+        protected abstract void ApplyCurrentValueToSubject();
     }
 }

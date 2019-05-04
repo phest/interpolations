@@ -16,12 +16,12 @@ namespace Interpolations.Tweens
             this.local = local;
         }
 
-        protected override void SaveInitialValue()
+        protected override void GetInitialValueFromSubject()
         {
             InitialValue = local ? subject.localPosition : subject.position;
         }
 
-        protected override void SetSubjectValue()
+        protected override void ApplyCurrentValueToSubject()
         {
             Vector3 value = Vector3.LerpUnclamped(InitialValue, TargetValue, ValueRatio);
             if (local)

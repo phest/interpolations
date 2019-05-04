@@ -16,12 +16,12 @@ namespace Interpolations.Tweens
             this.local = local;
         }
 
-        protected override void SaveInitialValue()
+        protected override void GetInitialValueFromSubject()
         {
             InitialValue = local ? subject.localRotation : subject.rotation;
         }
 
-        protected override void SetSubjectValue()
+        protected override void ApplyCurrentValueToSubject()
         {
             Quaternion value = Quaternion.LerpUnclamped(InitialValue, TargetValue, ValueRatio);
             if (local)

@@ -8,11 +8,11 @@ namespace Interpolations.Tweens
     /// </summary>
     public class PureTween : Tween<float>
     {
-        protected override void SaveInitialValue()
+        protected override void GetInitialValueFromSubject()
         {
         }
 
-        protected override void SetSubjectValue()
+        protected override void ApplyCurrentValueToSubject()
         {
         }
     }
