@@ -28,16 +28,6 @@ namespace Interpolations.Tweens
 
         public void StartTween(ITween tween, object uniqueBinding = null)
         {
-            if (uniqueBinding != null)
-            {
-                if (tweenPerBinding.ContainsKey(uniqueBinding))
-                {
-                    ITween boundTween = tweenPerBinding[uniqueBinding];                    
-                    tweenBindingPairs.Remove((boundTween, uniqueBinding));
-                }
-                tweenPerBinding[uniqueBinding] = tween;
-            }
-
             tweenBindingPairs.Add((tween, uniqueBinding));
             tween.StartNonChainable();
         }
@@ -51,20 +41,35 @@ namespace Interpolations.Tweens
             {
                 (ITween, object) pair = tweenBindingPairs[i];
                 ITween tween = pair.Item1;
+                object uniqueBinding = pair.Item2;
+
+                TweenState previousState = tween.State;
                 tween.Update(deltaTime);
-                if (tween.State != TweenState.Done)
+                TweenState currentState = tween.State;
+
+                // if tween left delay, check for binding replacement
+                if (uniqueBinding != null && previousState == TweenState.InDelay && currentState > previousState)
+                {
+                    if (tweenPerBinding.ContainsKey(uniqueBinding))
+                    {
+                        ITween boundTween = tweenPerBinding[uniqueBinding];
+                        tweenBindingPairs.Remove((boundTween, uniqueBinding));
+                    }
+
+                    tweenPerBinding[uniqueBinding] = tween;
+                }
+
+                if (currentState != TweenState.Done)
                 {
                     continue;
                 }
 
                 tweenBindingPairs.RemoveAt(i);
-                object uniqueBinding = pair.Item2;
-                if (pair.Item2 != null)
+                if (uniqueBinding != null)
                 {
                     tweenPerBinding.Remove(uniqueBinding);
                 }
             }
         }
-
     }
 }
