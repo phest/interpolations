@@ -6,7 +6,7 @@ namespace Interpolations
     using UnityEngine;
     using System.Collections.Generic;
 
-    public static class Tweens
+    public static partial class Tweens
     {
         public static void Run(ITween tween, object uniqueBinding = null)
         {
