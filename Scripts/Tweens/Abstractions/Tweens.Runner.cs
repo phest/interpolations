@@ -8,9 +8,9 @@ namespace Interpolations
 
     public static partial class Tweens
     {
-        public static void Run(ITween tween, object uniqueBinding = null)
+        public static T Run<T>(T tween, object uniqueBinding = null) where T : ITween
         {
-            Runner.SceneInstance.StartTween(tween, uniqueBinding);
+            return Runner.SceneInstance.StartTween(tween, uniqueBinding);
         }
 
         class Runner : MonoBehaviour
@@ -34,10 +34,11 @@ namespace Interpolations
             readonly Dictionary<object, ITween> tweenPerBinding = new Dictionary<object, ITween>();
 
             // Unique binding ensures only one tween bound to a specific object can tween at a given time
-            public void StartTween(ITween tween, object uniqueBinding = null)
+            public T StartTween<T>(T tween, object uniqueBinding = null) where T: ITween
             {
                 tweenBindingPairs.Add((tween, uniqueBinding));
                 tween.StartNonChainable();
+                return tween;
             }
 
             void Update()
