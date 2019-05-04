@@ -34,5 +34,6 @@ namespace Interpolations.Tweens
         ) : this(0, duration, ease, easing)
         {
         }
+
     }
 }
