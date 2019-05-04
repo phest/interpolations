@@ -6,24 +6,24 @@ namespace Interpolations
     using UnityEngine;
     using System.Collections.Generic;
 
-    public class Tweens
+    public static class Tweens
     {
         public static void Run(ITween tween, object uniqueBinding = null)
         {
-            AutoTweensRunner.SceneInstance.StartTween(tween, uniqueBinding);
+            Runner.SceneInstance.StartTween(tween, uniqueBinding);
         }
 
-        class AutoTweensRunner : MonoBehaviour
+        class Runner : MonoBehaviour
         {
-            static AutoTweensRunner _sceneInstance;
+            static Runner _sceneInstance;
 
-            public static AutoTweensRunner SceneInstance
+            public static Runner SceneInstance
             {
                 get
                 {
                     if (_sceneInstance == null)
                     {
-                        _sceneInstance = new GameObject("[ Tweens ]").AddComponent<AutoTweensRunner>();
+                        _sceneInstance = new GameObject("[ Tweens ]").AddComponent<Runner>();
                     }
 
                     return _sceneInstance;
