@@ -7,9 +7,6 @@ namespace Interpolations.Tweens
 
     public class FloatTween : ClosureTween<float>
     {
-        public sealed override Func<float> Getter { get; set; }
-        public sealed override Action<float> Setter { get; set; }
-
         public FloatTween(Func<float> getter, Action<float> setter)
         {
             Getter = getter;
@@ -23,8 +20,7 @@ namespace Interpolations.Tweens
 
         protected override void SetSubjectValue()
         {
-            float currentValue = InitialValue + (TargetValue - InitialValue) * ValueRatio;
-            Setter?.Invoke(currentValue);
+            Setter?.Invoke(InitialValue + (TargetValue - InitialValue) * ValueRatio);
         }
     }
 }

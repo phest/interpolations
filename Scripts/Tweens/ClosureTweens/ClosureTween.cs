@@ -7,7 +7,7 @@ namespace Interpolations.Tweens
 
     public abstract class ClosureTween<T> : Tween<T>
     {
-        public abstract Func<T> Getter { get; set; }
-        public abstract Action<T> Setter { get; set; }
+        public Func<T> Getter { get; set; }
+        public Action<T> Setter { get; set; }
     }
 }
