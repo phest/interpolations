@@ -26,6 +26,7 @@ namespace Interpolations.Tweens
         readonly List<(ITween, object)> tweenBindingPairs = new List<(ITween, object)>();
         readonly Dictionary<object, ITween> tweenPerBinding = new Dictionary<object, ITween>();
 
+        // Unique binding ensures only one tween bound to a specific object can tween at a given time
         public void StartTween(ITween tween, object uniqueBinding = null)
         {
             tweenBindingPairs.Add((tween, uniqueBinding));
@@ -39,15 +40,12 @@ namespace Interpolations.Tweens
             int count = tweenBindingPairs.Count;
             for (int i = count - 1; i >= 0; i--)
             {
-                (ITween, object) pair = tweenBindingPairs[i];
-                ITween tween = pair.Item1;
-                object uniqueBinding = pair.Item2;
-
+                (ITween tween, object uniqueBinding) = tweenBindingPairs[i];
                 TweenState previousState = tween.State;
                 tween.Update(deltaTime);
                 TweenState currentState = tween.State;
 
-                // if tween left delay, check for binding replacement
+                // if tween left delay, check for binding overwrite
                 if (uniqueBinding != null && previousState == TweenState.InDelay && currentState > previousState)
                 {
                     if (tweenPerBinding.ContainsKey(uniqueBinding))
