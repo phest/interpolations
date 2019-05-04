@@ -6,7 +6,7 @@ namespace Interpolations
     public interface ITween
     {
         void StartNonChainable();
-        void Update(float timeDelta);
+        TweenState Update(float timeDelta);
         TweenState State { get; }
     }
 }

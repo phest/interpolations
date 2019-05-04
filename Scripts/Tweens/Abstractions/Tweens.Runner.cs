@@ -34,7 +34,7 @@ namespace Interpolations
             readonly Dictionary<object, ITween> tweenPerBinding = new Dictionary<object, ITween>();
 
             // Unique binding ensures only one tween bound to a specific object can tween at a given time
-            public T StartTween<T>(T tween, object uniqueBinding = null) where T: ITween
+            public T StartTween<T>(T tween, object uniqueBinding = null) where T : ITween
             {
                 tweenBindingPairs.Add((tween, uniqueBinding));
                 tween.StartNonChainable();
@@ -50,8 +50,7 @@ namespace Interpolations
                 {
                     (ITween tween, object uniqueBinding) = tweenBindingPairs[i];
                     TweenState previousState = tween.State;
-                    tween.Update(deltaTime);
-                    TweenState currentState = tween.State;
+                    TweenState currentState = tween.Update(deltaTime);
 
                     // if tween left delay, check for binding overwrite
                     if (uniqueBinding != null && previousState == TweenState.InDelay && currentState > previousState)
