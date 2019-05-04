@@ -1,10 +1,9 @@
 ﻿// Interpolations - https://github.com/phest/interpolations
 // Copyright Steph Thirion - Licensed under the MIT license
 
-using System;
-
-namespace Interpolations.Tweens
+namespace Interpolations
 {
+    using System;
     using UnityEngine;
 
     public class ColorTween : ClosureTween<Color>

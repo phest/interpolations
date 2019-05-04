@@ -1,7 +1,7 @@
 // Interpolations - https://github.com/phest/interpolations
 // Copyright Steph Thirion - Licensed under the MIT license
 
-namespace Interpolations.Tweens
+namespace Interpolations
 {
     /// <summary>
     /// Unlinked Tween, no side effects (usable through its ValueRatio)

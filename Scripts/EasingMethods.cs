@@ -7,8 +7,6 @@
 //
 // See LICENSE file for details.
 
-using System;
-
 namespace Interpolations
 {
     using UnityEngine;
