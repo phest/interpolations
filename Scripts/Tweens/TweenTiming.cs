@@ -17,8 +17,8 @@ namespace Interpolations
         public TweenTiming(
             float delay,
             float duration,
-            I.Ease ease = default,
-            I.Easing easing = default
+            I.Ease ease = I.Ease.InOut,
+            I.Easing easing = I.Easing.Cubic
         )
         {
             Delay = delay;
@@ -29,8 +29,8 @@ namespace Interpolations
 
         public TweenTiming(
             float duration,
-            I.Ease ease = default,
-            I.Easing easing = default
+            I.Ease ease = I.Ease.InOut,
+            I.Easing easing = I.Easing.Cubic
         ) : this(0, duration, ease, easing)
         {
         }

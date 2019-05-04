@@ -51,7 +51,12 @@ namespace Interpolations
             easingMethod = I.EasingMethods[(short) _easing, (short) _ease];
         }
 
-        public Tween<T> Timing(float delay, float duration, I.Ease ease = default, I.Easing easing = default)
+        public Tween<T> Timing(
+            float delay,
+            float duration,
+            I.Ease ease = I.Ease.InOut,
+            I.Easing easing = I.Easing.Cubic
+        )
         {
             Delay = delay;
             Duration = duration;
@@ -83,7 +88,7 @@ namespace Interpolations
 
         float elapsedActiveTime;
         public float ValueRatio { get; private set; }
-        
+
         public Tween<T> Start()
         {
             elapsedActiveTime = 0;
@@ -92,7 +97,7 @@ namespace Interpolations
 
             return this;
         }
-        
+
         public void StartNonChainable()
         {
             Start();
