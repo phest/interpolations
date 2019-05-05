@@ -18,6 +18,11 @@ namespace Interpolations
             return Run(new Vector3Tween(getter, setter));
         }
 
+        public static Tween<Quaternion> RunQuaternion(Func<Quaternion> getter, Action<Quaternion> setter)
+        {
+            return Run(new QuaternionTween(getter, setter));
+        }
+        
         public static Tween<Color> RunColor(Func<Color> getter, Action<Color> setter)
         {
             return Run(new ColorTween(getter, setter));
