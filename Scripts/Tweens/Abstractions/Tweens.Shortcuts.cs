@@ -13,6 +13,12 @@ namespace Interpolations
             return Run(new FloatTween(getter, setter), uniqueBinding);
         }
 
+        public static Tween<Vector2> RunVector2(Func<Vector2> getter, Action<Vector2> setter,
+            object uniqueBinding = null)
+        {
+            return Run(new Vector2Tween(getter, setter), uniqueBinding);
+        }
+        
         public static Tween<Vector3> RunVector3(Func<Vector3> getter, Action<Vector3> setter,
             object uniqueBinding = null)
         {
