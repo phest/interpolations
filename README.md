@@ -27,7 +27,7 @@ https://twitter.com/stephbysteph/status/1125462189450465280
     - Tween instances can be reused, yo-yo-ed, or recycled
     - Tween easings configurable through editor
     - Pure tweens for tweens without side effects
-    - Closure tweens for custom tween instances (Float, Vector3, Quaternion, Color)    
+    - Closure tweens for custom tween instances (Float, Vector2-3, Quaternion, Color)
     - Convenience tweens for Transform control (Position, Rotation, Scale)
 
 ## Examples
@@ -112,7 +112,7 @@ Tweens.Run(new ColorTween(myScript.GetColor, myScript.SetColor))
 
 - Pre-setter value processor closure in Tween
 - More drag out types (Color, Quaternion, Vector2, etc)
-- More closure tween types (Vector2, Vector4, etc)
+- More closure tween types (Vector4, etc)
 - Documentation
 
 ### Possible features
