@@ -1,44 +1,44 @@
 
 # Interpolations
 
-Lightweight easing and tweening library for Unity 3D.
+Lightweight Unity library for smoothing movements and value progressions in code
+(dragging, easing, tweening).
 
 **API is currently experimental and may change.**
 
-## Features
+## Current Features
 
-### Current features
-
+- Drag outs
+    - On the fly dampening of changes over time (float and Vector3)
+    - Optional control and status of snapping
 - Easings
-    - All Robert Penner easing equations, optimized
-    - Easings API friendly with Unity's Lerps API
+    - Robert Penner easing equations, optimized
+    - Easings methods pluggable to Unity's Lerp methods
 - Tweens
-    - Lightweight and performant tweening suite
-    - Tween class extendable with two one-line methods 
-    - If needed, direct control over Tween instances and updating, 
-      for specific memory and/or flow needs
+    - Lightweight and flexible tweening suite
+    - Tween class extendable with two one-line methods
+    - If needed, direct control over Tween instances and updating,
+      for specific requirements in update timing or instancing   
     - Optional runner abstraction handling instances and updates
-    - Optional abstraction sugar for different tweens 
-    - Tween animations can be modified while tweening
-    - Tween instances can be reused or yo-yo-ed
+    - Optional abstraction sugar for different tween types
+    - Tween characteristics can be modified while tweening, for dynamic changes
+    - Tween instances can be reused, yo-yo-ed, or recycled
     - Tween easings configurable through editor
-    - Pure tweens for tweens without side effects outside of instance
-    - Closure tweens for custom tween instances (Float, Vector3, Color)    
-    - Transform tweens for easy Transform control (Position, Rotation, Scale)
-
-### Next features
-
-- More closure tweens (Vector2, Quaternion)
-- UniqueBinding in tween shortcuts
-- Euler setter for RotationTween
-- Documentation
-
-### Possible future features
-
-- Eased sliders (editor and UI)
-- Bezier and CatmullRom Interpolations
+    - Pure tweens for tweens without side effects
+    - Closure tweens for custom tween instances (Float, Vector3, Quaternion, Color)    
+    - Convenience tweens for Transform control (Position, Rotation, Scale)
 
 ## Examples
+
+### Smoothing out sudden value changes 
+
+```
+// (Within an update call, i.e. FixedUpdate)
+mixer.volume = Volume;
+                 |
+                 v
+mixer.volume = mixer.volume.DragOut(Volume, 30);
+```
 
 ### Adding easing to a lerp call
 
@@ -85,20 +85,18 @@ positionTween.Update(Time.timeDelta)
 ### Custom tweening instances
 
 ```
-Tweens.Run
+Tweens.RunFloat
 (
-    new FloatTween
-    (
-        () => mixer.GetFloat("sfxVol", out float vol) ? vol : 0,
-        vol =>
-        {
-            mixer.SetFloat("sfxVol", vol);
-            indicator.alpha = vol;
-        }
-    )
+    () => mixer.GetFloat("sfxVol", out float vol) ? vol : 0,
+    vol =>
+    {
+        mixer.SetFloat("sfxVol", vol);
+        indicator.alpha = vol;
+    }
 )
 .To(targetVolume)
 .Timing(0, 1, I.Sine.Out);
+
 ```
 
 ```
@@ -107,10 +105,28 @@ Tweens.Run(new ColorTween(myScript.GetColor, myScript.SetColor))
       .Timing(0, 1, I.Cubic.InOut);
 ```
 
+
+## Features Roadmap
+
+- Pre-setter value processor closure in Tween
+- More drag out types (Color, Quaternion, Vector2, etc)
+- More closure tween types (Vector2, Vector4, etc)
+- Documentation
+
+### Possible features
+
+- More convenience tweens for Unity classes (CanvasGroup, Image, etc)
+- Eased sliders (editor and UI)
+- Bezier and CatmullRom Interpolations
+
 ## Meta
+
+Interpolations
+https://github.com/phest/interpolations 
 
 By [Steph Thirion](http://trsp.net).
 
 Easing equations by [Robert Penner](http://robertpenner.com/easing), optimized by [Tween.js authors](https://github.com/tweenjs/tween.js/).
 
 All code open source under MIT License. See [LICENSE file](https://github.com/phest/interpolations/blob/master/LICENSE). 
+
