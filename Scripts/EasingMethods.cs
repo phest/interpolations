@@ -7,6 +7,8 @@
 //
 // See LICENSE file for details.
 
+using System;
+
 namespace Interpolations
 {
     using UnityEngine;
@@ -128,6 +130,35 @@ namespace Interpolations
             }
         }
 
+        public static class Expo
+        {
+            public static float In(float k)
+            {
+                return Math.Abs(k) < Mathf.Epsilon ? 0 : Mathf.Pow(1024, k - 1);
+            }
+
+            public static float Out(float k)
+            {
+                return Math.Abs(k - 1) < Mathf.Epsilon ? 1 : 1 - Mathf.Pow(2, - 10 * k);
+            }
+
+            public static float InOut(float k)
+            {
+                if (Math.Abs(k) < Mathf.Epsilon) {
+                    return 0;
+                }
+
+                if (Math.Abs(k - 1) < Mathf.Epsilon) {
+                    return 1;
+                }
+
+                if ((k *= 2) < 1) {
+                    return 0.5f * Mathf.Pow(1024, k - 1);
+                }
+
+                return 0.5f * (- Mathf.Pow(2, - 10 * (k - 1)) + 2);
+            }
+        }
         public static class Back
         {
             public static float In(float k)
