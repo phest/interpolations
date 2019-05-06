@@ -41,7 +41,7 @@ namespace Interpolations
                 return tween;
             }
 
-            void Update()
+            void FixedUpdate()
             {
                 float deltaTime = Time.deltaTime;
                 // save initial count (in case callbacks add new tweens)
