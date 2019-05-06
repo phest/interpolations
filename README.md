@@ -4,6 +4,8 @@
 Lightweight Unity library for smoothing movements and value progressions in code
 (dragging, easing, tweening).
 
+https://twitter.com/stephbysteph/status/1125462189450465280
+
 **API is currently experimental and may change.**
 
 ## Current Features
