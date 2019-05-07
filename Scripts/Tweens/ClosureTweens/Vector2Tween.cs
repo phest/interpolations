@@ -8,10 +8,9 @@ namespace Interpolations
 
     public class Vector2Tween : ClosureTween<Vector2>
     {
-        public Vector2Tween (Func<Vector2> getter, Action<Vector2> setter)
+        public Vector2Tween(Func<Vector2> getter, Action<Vector2> setter)
+            : base(getter, setter)
         {
-            Getter = getter;
-            Setter = setter;
         }
 
         protected override void GetInitialValueFromSubject()

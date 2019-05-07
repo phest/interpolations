@@ -8,9 +8,8 @@ namespace Interpolations
     public class FloatTween : ClosureTween<float>
     {
         public FloatTween(Func<float> getter, Action<float> setter)
+            : base(getter, setter)
         {
-            Getter = getter;
-            Setter = setter;
         }
 
         protected override void GetInitialValueFromSubject()

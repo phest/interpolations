@@ -9,9 +9,8 @@ namespace Interpolations
     public class QuaternionTween : ClosureTween<Quaternion>
     {
         public QuaternionTween(Func<Quaternion> getter, Action<Quaternion> setter)
+            : base(getter, setter)
         {
-            Getter = getter;
-            Setter = setter;
         }
 
         protected override void GetInitialValueFromSubject()

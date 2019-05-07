@@ -9,9 +9,8 @@ namespace Interpolations
     public class ColorTween : ClosureTween<Color>
     {
         public ColorTween(Func<Color> getter, Action<Color> setter)
+            : base(getter, setter)
         {
-            Getter = getter;
-            Setter = setter;
         }
 
         protected override void GetInitialValueFromSubject()
