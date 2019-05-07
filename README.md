@@ -34,7 +34,7 @@ https://twitter.com/stephbysteph/status/1125462189450465280
 
 ### Smoothing out sudden value changes 
 
-```
+``` c#
 // (Within an update call, i.e. FixedUpdate)
 mixer.volume = Volume;
                  |
@@ -44,7 +44,7 @@ mixer.volume = mixer.volume.DragOut(Volume, 30);
 
 ### Adding easing to a lerp call
 
-```
+``` c#
 Vector3.Lerp(a, b, ratio);
                      |
                      v
@@ -55,7 +55,7 @@ Check this [cheat sheet](https://easings.net/en) for the effect of the different
 
 ### Tweening a position, the abstracted way
 
-```
+``` c#
 Tweens.Run(new PositionTween(transform))
       .To(targetPosition)
       .Timing(0, 1, I.Circ.InOut);
@@ -63,7 +63,7 @@ Tweens.Run(new PositionTween(transform))
 
 or
 
-```
+``` c#
 Tweens.RunPosition(transform)
       .To(targetPosition)
       .Timing(0, 1, I.Circ.InOut);
@@ -71,7 +71,7 @@ Tweens.RunPosition(transform)
 
 ### Tweening a position, the controlling way
 
-```
+``` c#
 Tween<Vector3> positionTween;
 ...
 positionTween = new PositionTween(transform))
@@ -86,7 +86,7 @@ positionTween.Update(Time.timeDelta)
 
 ### Custom tweening instances
 
-```
+``` c#
 Tweens.RunFloat
 (
     () => mixer.GetFloat("sfxVol", out float vol) ? vol : 0,
@@ -101,7 +101,7 @@ Tweens.RunFloat
 
 ```
 
-```
+``` c#
 Tweens.Run(new ColorTween(myScript.GetColor, myScript.SetColor))
       .To(Color.yellow)
       .Timing(0, 1, I.Cubic.InOut);
