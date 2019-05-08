@@ -10,26 +10,31 @@ namespace Interpolations
     {
         public static T Run<T>(T tween, object uniqueBinding = null) where T : ITween
         {
-            return Runner.SceneInstance.StartTween(tween, uniqueBinding);
+            return RunnerInstance.StartTween(tween, uniqueBinding);
+        }
+
+        static Runner _runnerInstance;
+
+        static Runner RunnerInstance
+        {
+            get
+            {
+                if (_runnerInstance == null)
+                {
+                    _runnerInstance = new GameObject("[ Tweens ]").AddComponent<Runner>();
+                }
+
+                return _runnerInstance;
+            }
+        }
+
+        static void OnRunnerInstanceDestroy()
+        {
+            _runnerInstance = null;
         }
 
         class Runner : MonoBehaviour
         {
-            static Runner _sceneInstance;
-
-            public static Runner SceneInstance
-            {
-                get
-                {
-                    if (_sceneInstance == null)
-                    {
-                        _sceneInstance = new GameObject("[ Tweens ]").AddComponent<Runner>();
-                    }
-
-                    return _sceneInstance;
-                }
-            }
-
             readonly List<(ITween, object)> tweenBindingPairs = new List<(ITween, object)>();
             readonly Dictionary<object, ITween> tweenPerBinding = new Dictionary<object, ITween>();
 
@@ -75,6 +80,11 @@ namespace Interpolations
                         tweenPerBinding.Remove(uniqueBinding);
                     }
                 }
+            }
+
+            void OnDestroy()
+            {
+                OnRunnerInstanceDestroy();
             }
         }
     }
