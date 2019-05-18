@@ -40,6 +40,7 @@ namespace Interpolations
         /// </summary>
         public static Vector3 DragOut(this Vector3 current, Vector3 target, float divisor, float snap)
         {
+            // ReSharper disable once UnusedVariable
             return DragOut(current, target, divisor, snap, out bool snapped);
         }
     }
