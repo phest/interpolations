@@ -51,4 +51,55 @@ namespace Interpolations
             return Run(new ScaleTween(otherTransform), uniqueBinding);
         }
     }
+
+    public static partial class Tweens
+    {
+        public static T Run<T>(T tween, object uniqueBinding = null) where T : ITween 
+        {
+            return Runner.Run(tween, uniqueBinding);
+        }
+        
+        public static Tween<float> RunFloat(Func<float> getter, Action<float> setter, object uniqueBinding = null)
+        {
+            return Runner.RunFloat(getter, setter, uniqueBinding);
+        }
+
+        public static Tween<Vector2> RunVector2(Func<Vector2> getter, Action<Vector2> setter,
+            object uniqueBinding = null)
+        {
+            return Runner.RunVector2(getter, setter, uniqueBinding);
+        }
+        
+        public static Tween<Vector3> RunVector3(Func<Vector3> getter, Action<Vector3> setter,
+            object uniqueBinding = null)
+        {
+            return Runner.RunVector3(getter, setter, uniqueBinding);
+        }
+
+        public static Tween<Quaternion> RunQuaternion(Func<Quaternion> getter, Action<Quaternion> setter,
+            object uniqueBinding = null)
+        {
+            return Runner.RunQuaternion(getter, setter, uniqueBinding);
+        }
+
+        public static Tween<Color> RunColor(Func<Color> getter, Action<Color> setter, object uniqueBinding = null)
+        {
+            return Runner.RunColor(getter, setter, uniqueBinding);
+        }
+
+        public static Tween<Vector3> RunPosition(Transform otherTransform, bool local = true, object uniqueBinding = null)
+        {
+            return Runner.RunPosition(otherTransform, local, uniqueBinding);
+        }
+
+        public static Tween<Quaternion> RunRotation(Transform otherTransform, bool local = true, object uniqueBinding = null)
+        {
+            return Runner.RunRotation(otherTransform, local, uniqueBinding);
+        }
+
+        public static Tween<Vector3> RunScale(Transform otherTransform, object uniqueBinding = null)
+        {
+            return Runner.RunScale(otherTransform, uniqueBinding);
+        }
+    }
 }

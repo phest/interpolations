@@ -5,7 +5,7 @@ namespace Interpolations
 {
     using UnityEngine;
 
-    public static class Tweens
+    public static partial class Tweens
     {
         static GameObject _runnerHolder;
 
@@ -24,7 +24,7 @@ namespace Interpolations
 
         static Runner _runnerInstance;
 
-        public static Runner Runner
+        static Runner Runner
         {
             get
             {
