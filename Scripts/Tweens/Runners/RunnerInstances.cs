@@ -7,6 +7,15 @@ namespace Interpolations
 
     public static partial class Tweens
     {
+        public static T Run<T>(T tween, object uniqueBinding = null) where T : ITween
+        {
+            return Runner.Run(tween, uniqueBinding);
+        }
+
+        public static FixedRunner Fixed => FixedRunner;
+
+        public static LateRunner Late => LateRunner;
+
         static GameObject _runnerHolder;
 
         static GameObject RunnersHolder
@@ -41,10 +50,10 @@ namespace Interpolations
         {
             _runnerInstance = null;
         }
-        
+
         static FixedRunner _fixedRunnerInstance;
 
-        public static FixedRunner FixedRunner
+        static FixedRunner FixedRunner
         {
             get
             {
@@ -61,10 +70,10 @@ namespace Interpolations
         {
             _fixedRunnerInstance = null;
         }
-        
+
         static LateRunner _lateRunnerInstance;
 
-        public static LateRunner LateRunner
+        static LateRunner LateRunner
         {
             get
             {

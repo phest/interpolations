@@ -54,11 +54,6 @@ namespace Interpolations
 
     public static partial class Tweens
     {
-        public static T Run<T>(T tween, object uniqueBinding = null) where T : ITween 
-        {
-            return Runner.Run(tween, uniqueBinding);
-        }
-        
         public static Tween<float> RunFloat(Func<float> getter, Action<float> setter, object uniqueBinding = null)
         {
             return Runner.RunFloat(getter, setter, uniqueBinding);
