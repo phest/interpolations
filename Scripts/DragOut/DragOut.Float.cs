@@ -52,6 +52,7 @@ namespace Interpolations
         /// </summary>
         public static float DragOut(this float current, float target, float divisor, float snap)
         {
+            // ReSharper disable once UnusedVariable
             return DragOut(current, target, divisor, snap, out bool snapped);
         }
     }

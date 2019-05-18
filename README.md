@@ -20,8 +20,9 @@ https://twitter.com/stephbysteph/status/1125462189450465280
     - Lightweight and flexible tweening suite
     - Tween class extendable with two one-line methods
     - If needed, direct control over Tween instances and updating,
-      for specific requirements in update timing or instancing   
-    - Optional runner abstraction handling instances and updates
+      for specific requirements in update timing or instancing
+    - Optional runner abstraction handling instances and updates,
+      with choice over which update event function to update within
     - Optional abstraction sugar for different tween types
     - Tween characteristics can be modified while tweening, for dynamic changes
     - Tween instances can be reused, yo-yo-ed, or recycled
@@ -61,12 +62,18 @@ Tweens.Run(new PositionTween(transform))
       .Timing(0, 1, I.Circ.InOut);
 ```
 
-or
+or using a shortcut:
 
 ``` c#
 Tweens.RunPosition(transform)
       .To(targetPosition)
       .Timing(0, 1, I.Circ.InOut);
+```
+
+or having it update within `FixedUpdate`/`LateUpdate` instead of `Update`:
+``` c#
+Tweens.Fixed.Run...
+Tweens.Late.Run...
 ```
 
 ### Tweening a position, the controlling way
